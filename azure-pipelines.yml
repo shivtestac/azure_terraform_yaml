@@ -5,6 +5,11 @@ pool:
   name: Default 
 
 steps:
+- checkout: self
+  fetchDepth: 0  # Ensures full commit history is available
+
+
+
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
