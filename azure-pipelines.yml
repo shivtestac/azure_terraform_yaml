@@ -7,3 +7,25 @@ pool:
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
+
+- task: TerraformInstaller@1
+  inputs:
+    terraformVersion: 'latest'
+
+
+- task: TerraformTaskV4@4
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    backendServiceArm: 'Pay-As-You-Go(1)(e0b04bb4-2704-41a6-894f-a1032232638a)'
+    backendAzureRmResourceGroupName: 'terraform-backend-rg'
+    backendAzureRmStorageAccountName: 'terraformbackendshiv'
+    backendAzureRmContainerName: 'tfstate'
+    backendAzureRmKey: 'lod'
+    
+
+- task: TerraformTaskV4@4
+  inputs:
+    provider: 'azurerm'
+    command: 'apply'
+    environmentServiceNameAzureRM: 'Pay-As-You-Go(2)(e0b04bb4-2704-41a6-894f-a1032232638a)'
